@@ -15,17 +15,24 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
         }
 
         /* Header */
         header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 2rem 0;
+            padding: 1rem 0;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            backdrop-filter: blur(10px);
         }
 
         nav {
@@ -39,41 +46,87 @@
 
         nav h1 {
             font-size: 1.5rem;
+            animation: fadeInLeft 0.8s ease;
         }
 
         nav ul {
             display: flex;
             list-style: none;
             gap: 2rem;
+            animation: fadeInRight 0.8s ease;
         }
 
         nav a {
             color: white;
             text-decoration: none;
-            transition: opacity 0.3s;
+            transition: all 0.3s;
+            position: relative;
         }
 
-        nav a:hover {
-            opacity: 0.8;
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
         }
 
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 6rem 2rem;
+            padding: 8rem 2rem;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/></svg>');
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            from { transform: translateY(0); }
+            to { transform: translateY(-100px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
         }
 
         .hero h2 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
         }
 
         .hero p {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             margin-bottom: 2rem;
-            opacity: 0.9;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            animation: fadeInUp 1s ease 0.4s backwards;
         }
 
         .btn {
@@ -82,20 +135,67 @@
             background: white;
             color: #667eea;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 50px;
             font-weight: bold;
-            transition: transform 0.3s;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         .btn:hover {
             transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         /* Container */
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 4rem 2rem;
+            padding: 5rem 2rem;
         }
 
         /* Section Titles */
@@ -104,36 +204,73 @@
             font-size: 2.5rem;
             margin-bottom: 3rem;
             color: #667eea;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
         }
 
         /* Projects Section */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
         }
 
         .project-card {
             background: white;
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .project-card:hover::before {
+            transform: scaleX(1);
         }
 
         .project-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
         }
 
         .project-image {
             width: 100%;
-            height: 200px;
+            height: 220px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 3rem;
+            font-size: 4rem;
+            transition: all 0.4s;
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.05);
         }
 
         .project-content {
@@ -143,11 +280,13 @@
         .project-content h3 {
             margin-bottom: 0.5rem;
             color: #333;
+            font-size: 1.4rem;
         }
 
         .project-content p {
             margin-bottom: 1rem;
             color: #666;
+            line-height: 1.6;
         }
 
         .tech-tags {
@@ -158,11 +297,12 @@
         }
 
         .tech-tag {
-            background: #e0e7ff;
+            background: linear-gradient(135deg, #e0e7ff 0%, #f0e7ff 100%);
             color: #667eea;
-            padding: 0.3rem 0.8rem;
+            padding: 0.4rem 1rem;
             border-radius: 20px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            font-weight: 500;
         }
 
         .project-links {
@@ -174,11 +314,17 @@
             color: #667eea;
             text-decoration: none;
             font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .project-links a:hover {
+            color: #764ba2;
+            transform: translateX(3px);
         }
 
         /* About Section */
         #sobre-mi {
-            background: #f8f9fa;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         }
 
         .about-content {
@@ -188,9 +334,10 @@
         }
 
         .about-content p {
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            color: #666;
+            font-size: 1.15rem;
+            margin-bottom: 1.5rem;
+            color: #555;
+            line-height: 1.8;
         }
 
         .skills {
@@ -198,14 +345,81 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 1rem;
-            margin-top: 2rem;
+            margin-top: 2.5rem;
         }
 
         .skill {
             background: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 1rem 1.8rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .skill:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        /* Certifications Section */
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .cert-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            border-left: 4px solid #667eea;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .cert-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cert-card h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .cert-card .issuer {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-card .date {
+            color: #999;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .cert-link {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .cert-link:hover {
+            color: #764ba2;
         }
 
         /* Contact Section */
@@ -213,6 +427,12 @@
             max-width: 600px;
             margin: 0 auto;
             text-align: center;
+        }
+
+        .contact-content p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
         }
 
         .contact-links {
@@ -225,38 +445,108 @@
 
         .contact-link {
             display: flex;
+            flex-direction: column;
             align-items: center;
             gap: 0.5rem;
             color: #667eea;
             text-decoration: none;
-            font-size: 1.1rem;
-            transition: transform 0.3s;
+            font-size: 1rem;
+            transition: all 0.3s;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            min-width: 120px;
         }
 
         .contact-link:hover {
-            transform: scale(1.1);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .contact-icon {
+            font-size: 2rem;
         }
 
         /* Footer */
         footer {
-            background: #333;
+            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
             color: white;
             text-align: center;
-            padding: 2rem;
+            padding: 2.5rem;
+        }
+
+        footer p {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            opacity: 0.8;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            transform: translateY(-2px);
         }
 
         /* Responsive */
         @media (max-width: 768px) {
             .hero h2 {
-                font-size: 2rem;
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
             }
 
             nav ul {
                 gap: 1rem;
+                font-size: 0.9rem;
             }
 
             .section-title {
                 font-size: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 200px;
+            }
+
+            .container {
+                padding: 3rem 1rem;
+            }
+        }
+
+        /* Mobile Menu Toggle (opcional para futuro) */
+        .menu-toggle {
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            nav h1 {
+                font-size: 1.2rem;
+            }
+
+            nav ul {
+                gap: 0.8rem;
+                font-size: 0.85rem;
             }
         }
     </style>
@@ -269,6 +559,7 @@
             <ul>
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#proyectos">Proyectos</a></li>
+                <li><a href="#certificaciones">Certificaciones</a></li>
                 <li><a href="#sobre-mi">Sobre Mí</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
@@ -277,9 +568,14 @@
 
     <!-- Hero Section -->
     <section class="hero" id="inicio">
-        <h2>Esteban Morales</h2>
-        <p>Desarrollador apasionado por crear soluciones tecnológicas</p>
-        <a href="#proyectos" class="btn">Ver Mis Proyectos</a>
+        <div class="hero-content">
+            <h2>Hola, soy Esteban Morales 👋</h2>
+            <p>Desarrollador apasionado por crear soluciones tecnológicas innovadoras</p>
+            <div class="hero-buttons">
+                <a href="#proyectos" class="btn">Ver Mis Proyectos</a>
+                <a href="#contacto" class="btn btn-secondary">Contáctame</a>
+            </div>
+        </div>
     </section>
 
     <!-- Projects Section -->
@@ -291,14 +587,14 @@
                 <div class="project-image">🚀</div>
                 <div class="project-content">
                     <h3>chest-xray-classifier</h3>
-                    <p>Descripción breve de qué hace este proyecto y qué problema resuelve.</p>
+                    <p>Descripción breve de qué hace este proyecto y qué problema resuelve de manera efectiva.</p>
                     <div class="tech-tags">
                         <span class="tech-tag">Python</span>
                         <span class="tech-tag">Flask</span>
                         <span class="tech-tag">SQL</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://github.com/tuusuario/proyecto1" target="_blank">📂 GitHub</a>
+                        <a href="https://github.com/EstebanM-M/chest-xray-classifier" target="_blank">📂 GitHub</a>
                         <a href="#" target="_blank">🔗 Demo</a>
                     </div>
                 </div>
@@ -309,7 +605,7 @@
                 <div class="project-image">💻</div>
                 <div class="project-content">
                     <h3>Nombre del Proyecto 2</h3>
-                    <p>Descripción breve de qué hace este proyecto y qué problema resuelve.</p>
+                    <p>Descripción breve de qué hace este proyecto y qué problema resuelve de manera efectiva.</p>
                     <div class="tech-tags">
                         <span class="tech-tag">JavaScript</span>
                         <span class="tech-tag">React</span>
@@ -327,7 +623,7 @@
                 <div class="project-image">🎨</div>
                 <div class="project-content">
                     <h3>Nombre del Proyecto 3</h3>
-                    <p>Descripción breve de qué hace este proyecto y qué problema resuelve.</p>
+                    <p>Descripción breve de qué hace este proyecto y qué problema resuelve de manera efectiva.</p>
                     <div class="tech-tags">
                         <span class="tech-tag">HTML</span>
                         <span class="tech-tag">CSS</span>
@@ -342,13 +638,46 @@
         </div>
     </section>
 
+    <!-- Certifications Section -->
+    <section class="container" id="certificaciones">
+        <h2 class="section-title">Certificaciones</h2>
+        <div class="certifications-grid">
+            <!-- Certification 1 -->
+            <div class="cert-card">
+                <div class="cert-icon">🎓</div>
+                <h3>Nombre de la Certificación</h3>
+                <p class="issuer">Institución o Plataforma</p>
+                <p class="date">Fecha de obtención</p>
+                <a href="#" target="_blank" class="cert-link">Ver credencial →</a>
+            </div>
+
+            <!-- Certification 2 -->
+            <div class="cert-card">
+                <div class="cert-icon">📜</div>
+                <h3>Nombre de la Certificación</h3>
+                <p class="issuer">Institución o Plataforma</p>
+                <p class="date">Fecha de obtención</p>
+                <a href="#" target="_blank" class="cert-link">Ver credencial →</a>
+            </div>
+
+            <!-- Certification 3 -->
+            <div class="cert-card">
+                <div class="cert-icon">🏆</div>
+                <h3>Nombre de la Certificación</h3>
+                <p class="issuer">Institución o Plataforma</p>
+                <p class="date">Fecha de obtención</p>
+                <a href="#" target="_blank" class="cert-link">Ver credencial →</a>
+            </div>
+        </div>
+    </section>
+
     <!-- About Section -->
     <section id="sobre-mi">
         <div class="container">
             <h2 class="section-title">Sobre Mí</h2>
             <div class="about-content">
-                <p>Soy un desarrollador con experiencia en [tu área de especialización]. Me apasiona aprender nuevas tecnologías y resolver problemas complejos.</p>
-                <p>Actualmente estoy enfocado en [áreas de interés] y busco oportunidades para contribuir en proyectos desafiantes.</p>
+                <p>Soy un desarrollador con experiencia en [tu área de especialización]. Me apasiona aprender nuevas tecnologías y resolver problemas complejos de manera creativa.</p>
+                <p>Actualmente estoy enfocado en [áreas de interés] y busco oportunidades para contribuir en proyectos desafiantes que generen impacto positivo.</p>
                 
                 <div class="skills">
                     <div class="skill">Python</div>
@@ -357,6 +686,8 @@
                     <div class="skill">Git</div>
                     <div class="skill">SQL</div>
                     <div class="skill">React</div>
+                    <div class="skill">Node.js</div>
+                    <div class="skill">APIs REST</div>
                 </div>
             </div>
         </div>
@@ -366,17 +697,21 @@
     <section class="container" id="contacto">
         <h2 class="section-title">Contacto</h2>
         <div class="contact-content">
-            <p>¿Te interesa trabajar conmigo? ¡Hablemos!</p>
+            <p>¿Te interesa trabajar conmigo o tienes alguna pregunta? ¡Hablemos!</p>
             <div class="contact-links">
-                <a href="mailto:Estebanmoralesm@outlook.com" class="contact-link">
-                    📧 Email
+                <a href="mailto:estebanmoralesm@outlook.com" class="contact-link">
+                    <span class="contact-icon">📧</span>
+                    <span>Email</span>
                 </a>
                 <a href="https://github.com/EstebanM-M" target="_blank" class="contact-link">
-                    💻 GitHub
+                    <span class="contact-icon">💻</span>
+                    <span>GitHub</span>
                 </a>
                 <a href="https://www.linkedin.com/in/esteban-morales-mahecha/" target="_blank" class="contact-link">
-                    💼 LinkedIn
+                    <span class="contact-icon">💼</span>
+                    <span>LinkedIn</span>
                 </a>
+                
             </div>
         </div>
     </section>
@@ -384,6 +719,12 @@
     <!-- Footer -->
     <footer>
         <p>&copy; 2025 Esteban Morales. Todos los derechos reservados.</p>
+        <div class="footer-links">
+            <a href="#inicio">Inicio</a>
+            <a href="#proyectos">Proyectos</a>
+            <a href="#certificaciones">Certificaciones</a>
+            <a href="#contacto">Contacto</a>
+        </div>
     </footer>
 </body>
 </html>
