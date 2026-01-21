@@ -48,6 +48,12 @@
             animation: fadeInLeft 0.8s ease;
         }
 
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
         nav ul {
             display: flex;
             list-style: none;
@@ -75,6 +81,24 @@
 
         nav a:hover::after {
             width: 100%;
+        }
+
+        /* Language Toggle */
+        .lang-toggle {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid white;
+            border-radius: 20px;
+            padding: 0.3rem 0.8rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .lang-toggle:hover {
+            background: white;
+            color: #667eea;
         }
 
         /* Hero Section */
@@ -535,6 +559,10 @@
             .projects-grid {
                 grid-template-columns: 1fr;
             }
+
+            .nav-right {
+                gap: 1rem;
+            }
         }
 
         @media (max-width: 600px) {
@@ -543,8 +571,11 @@
             }
 
             nav ul {
-                gap: 0.8rem;
-                font-size: 0.85rem;
+                display: none;
+            }
+
+            .nav-right {
+                margin-left: auto;
             }
         }
     </style>
@@ -554,38 +585,41 @@
     <header>
         <nav>
             <h1>Esteban Morales</h1>
-            <ul>
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#proyectos">Proyectos</a></li>
-                <li><a href="#certificaciones">Certificaciones</a></li>
-                <li><a href="#sobre-mi">Sobre Mí</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
+            <div class="nav-right">
+                <ul>
+                    <li><a href="#inicio" class="nav-link" data-es="Inicio" data-en="Home">Inicio</a></li>
+                    <li><a href="#proyectos" class="nav-link" data-es="Proyectos" data-en="Projects">Proyectos</a></li>
+                    <li><a href="#certificaciones" class="nav-link" data-es="Certificaciones" data-en="Certifications">Certificaciones</a></li>
+                    <li><a href="#sobre-mi" class="nav-link" data-es="Sobre Mí" data-en="About">Sobre Mí</a></li>
+                    <li><a href="#contacto" class="nav-link" data-es="Contacto" data-en="Contact">Contacto</a></li>
+                </ul>
+                <button class="lang-toggle" onclick="toggleLanguage()">EN</button>
+            </div>
         </nav>
     </header>
 
     <!-- Hero Section -->
     <section class="hero" id="inicio">
         <div class="hero-content">
-            <h2>Hola, soy Esteban Morales 👋</h2>
-            <p>ML Engineer especializado en Computer Vision, NLP y MLOps</p>
+            <h2 class="hero-title" data-es="Hola, soy Esteban Morales 👋" data-en="Hi, I'm Esteban Morales 👋">Hola, soy Esteban Morales 👋</h2>
+            <p class="hero-subtitle" data-es="Ingeniero Electrónico construyendo soluciones ML | Abierto a roles de ML/AI Engineering" data-en="Electronic Engineer building ML solutions | Open to ML/AI Engineering roles">ML Engineer especializado en Computer Vision, NLP y MLOps</p>
             <div class="hero-buttons">
-                <a href="#proyectos" class="btn">Ver Mis Proyectos</a>
-                <a href="#contacto" class="btn btn-secondary">Contáctame</a>
+                <a href="#proyectos" class="btn btn-projects" data-es="Ver Mis Proyectos" data-en="View My Projects">Ver Mis Proyectos</a>
+                <a href="#contacto" class="btn btn-secondary btn-contact" data-es="Contáctame" data-en="Contact Me">Contáctame</a>
             </div>
         </div>
     </section>
 
     <!-- Projects Section -->
     <section class="container" id="proyectos">
-        <h2 class="section-title">Mis Proyectos</h2>
+        <h2 class="section-title section-title-projects" data-es="Mis Proyectos" data-en="My Projects">Mis Proyectos</h2>
         <div class="projects-grid">
             <!-- Project 1: Object Tracking -->
             <div class="project-card">
                 <div class="project-image">🎥</div>
                 <div class="project-content">
                     <h3>Object Tracking System</h3>
-                    <p>Sistema end-to-end de detección y seguimiento multi-objeto en videos usando YOLOv8 y ByteTrack. Incluye API REST con FastAPI, interfaz Streamlit interactiva, y deployment completo con Docker. Procesa 30-50 FPS en GPU y trackea 50+ objetos simultáneamente.</p>
+                    <p class="project-desc-1" data-es="Sistema end-to-end de detección y seguimiento multi-objeto en videos usando YOLOv8 y ByteTrack. Incluye API REST con FastAPI, interfaz Streamlit interactiva, y deployment completo con Docker. Procesa 30-50 FPS en GPU y trackea 50+ objetos simultáneamente." data-en="End-to-end multi-object detection and tracking system in videos using YOLOv8 and ByteTrack. Includes REST API with FastAPI, interactive Streamlit interface, and complete Docker deployment. Processes 30-50 FPS on GPU and tracks 50+ objects simultaneously.">Sistema end-to-end de detección y seguimiento multi-objeto en videos usando YOLOv8 y ByteTrack. Incluye API REST con FastAPI, interfaz Streamlit interactiva, y deployment completo con Docker. Procesa 30-50 FPS en GPU y trackea 50+ objetos simultáneamente.</p>
                     <div class="tech-tags">
                         <span class="tech-tag">YOLOv8</span>
                         <span class="tech-tag">ByteTrack</span>
@@ -604,7 +638,7 @@
                 <div class="project-image">💬</div>
                 <div class="project-content">
                     <h3>Sentiment Analysis API</h3>
-                    <p>API de producción con DistilBERT para análisis de sentimientos en texto. Incluye 8 endpoints REST, base de datos PostgreSQL para persistencia, y dashboard interactivo con Streamlit. Optimizada para deployment en entornos con recursos limitados (512MB RAM). Accuracy: 95%.</p>
+                    <p class="project-desc-2" data-es="API de producción con DistilBERT para análisis de sentimientos en texto. Incluye 8 endpoints REST, base de datos PostgreSQL para persistencia, y dashboard interactivo con Streamlit. Optimizada para deployment en entornos con recursos limitados (512MB RAM). Accuracy: 95%." data-en="Production API with DistilBERT for text sentiment analysis. Includes 8 REST endpoints, PostgreSQL database for persistence, and interactive Streamlit dashboard. Optimized for deployment in resource-limited environments (512MB RAM). Accuracy: 95%.">API de producción con DistilBERT para análisis de sentimientos en texto. Incluye 8 endpoints REST, base de datos PostgreSQL para persistencia, y dashboard interactivo con Streamlit. Optimizada para deployment en entornos con recursos limitados (512MB RAM). Accuracy: 95%.</p>
                     <div class="tech-tags">
                         <span class="tech-tag">DistilBERT</span>
                         <span class="tech-tag">FastAPI</span>
@@ -623,7 +657,7 @@
                 <div class="project-image">📈</div>
                 <div class="project-content">
                     <h3>Time Series Forecasting Platform</h3>
-                    <p>Plataforma multi-modelo para forecasting con Prophet, ARIMA, XGBoost y LSTM. Los usuarios pueden subir sus propios datos CSV y obtener predicciones en tiempo real. XGBoost alcanzó 0.94% MAPE con 40 features engineered. ROI proyectado: $8M+ anuales.</p>
+                    <p class="project-desc-3" data-es="Plataforma multi-modelo para forecasting con Prophet, ARIMA, XGBoost y LSTM. Los usuarios pueden subir sus propios datos CSV y obtener predicciones en tiempo real. XGBoost alcanzó 0.94% MAPE con 40 features engineered. ROI proyectado: $8M+ anuales." data-en="Multi-model forecasting platform with Prophet, ARIMA, XGBoost and LSTM. Users can upload their own CSV data and get real-time predictions. XGBoost achieved 0.94% MAPE with 40 engineered features. Projected ROI: $8M+ annually.">Plataforma multi-modelo para forecasting con Prophet, ARIMA, XGBoost y LSTM. Los usuarios pueden subir sus propios datos CSV y obtener predicciones en tiempo real. XGBoost alcanzó 0.94% MAPE con 40 features engineered. ROI proyectado: $8M+ anuales.</p>
                     <div class="tech-tags">
                         <span class="tech-tag">XGBoost</span>
                         <span class="tech-tag">LSTM</span>
@@ -642,7 +676,7 @@
                 <div class="project-image">⚙️</div>
                 <div class="project-content">
                     <h3>MLOps Churn Prediction System</h3>
-                    <p>Sistema MLOps completo con automated retraining, drift detection usando Kolmogorov-Smirnov test, y webhooks para workflows event-driven. Incluye MLflow experiment tracking, FastAPI REST API, y Streamlit dashboard. ROC-AUC: 0.8485 con CatBoost.</p>
+                    <p class="project-desc-4" data-es="Sistema MLOps completo con automated retraining, drift detection usando Kolmogorov-Smirnov test, y webhooks para workflows event-driven. Incluye MLflow experiment tracking, FastAPI REST API, y Streamlit dashboard. ROC-AUC: 0.8485 con CatBoost." data-en="Complete MLOps system with automated retraining, drift detection using Kolmogorov-Smirnov test, and webhooks for event-driven workflows. Includes MLflow experiment tracking, FastAPI REST API, and Streamlit dashboard. ROC-AUC: 0.8485 with CatBoost.">Sistema MLOps completo con automated retraining, drift detection usando Kolmogorov-Smirnov test, y webhooks para workflows event-driven. Incluye MLflow experiment tracking, FastAPI REST API, y Streamlit dashboard. ROC-AUC: 0.8485 con CatBoost.</p>
                     <div class="tech-tags">
                         <span class="tech-tag">MLflow</span>
                         <span class="tech-tag">Evidently AI</span>
@@ -661,7 +695,7 @@
                 <div class="project-image">🤖</div>
                 <div class="project-content">
                     <h3>Azure E-commerce Chatbot</h3>
-                    <p>Chatbot conversacional con Azure Bot Framework SDK, análisis de sentimientos en tiempo real (VADER), y sistema de recomendaciones ML usando TF-IDF. Incluye intent recognition, order tracking, y dashboard analítico con Streamlit. Arquitectura async para 1000+ usuarios concurrentes.</p>
+                    <p class="project-desc-5" data-es="Chatbot conversacional con Azure Bot Framework SDK, análisis de sentimientos en tiempo real (VADER), y sistema de recomendaciones ML usando TF-IDF. Incluye intent recognition, order tracking, y dashboard analítico con Streamlit. Arquitectura async para 1000+ usuarios concurrentes." data-en="Conversational chatbot with Azure Bot Framework SDK, real-time sentiment analysis (VADER), and ML recommendation system using TF-IDF. Includes intent recognition, order tracking, and analytical dashboard with Streamlit. Async architecture for 1000+ concurrent users.">Chatbot conversacional con Azure Bot Framework SDK, análisis de sentimientos en tiempo real (VADER), y sistema de recomendaciones ML usando TF-IDF. Incluye intent recognition, order tracking, y dashboard analítico con Streamlit. Arquitectura async para 1000+ usuarios concurrentes.</p>
                     <div class="tech-tags">
                         <span class="tech-tag">Azure Bot</span>
                         <span class="tech-tag">VADER</span>
@@ -674,30 +708,12 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Project 6: Azure Chatbot -->
-            <div class="project-card">
-                <div class="project-image">🚀</div>
-                <div class="project-content">
-                    <h3>chest-xray-classifier</h3>
-                    <p>Descripción breve de qué hace este proyecto y qué problema resuelve de manera efectiva.</p>
-                    <div class="tech-tags">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Flask</span>
-                        <span class="tech-tag">SQL</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/EstebanM-M/chest-xray-classifier" target="_blank">📂 GitHub</a>
-                        <a href="#" target="_blank">🔗 Demo</a>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
     <!-- Certifications Section -->
     <section class="container" id="certificaciones">
-        <h2 class="section-title">Certificaciones</h2>
+        <h2 class="section-title section-title-certs" data-es="Certificaciones" data-en="Certifications">Certificaciones</h2>
         <div class="certifications-grid">
             <!-- Certification 1 -->
             <div class="cert-card">
@@ -705,7 +721,7 @@
                 <h3>IBM AI Engineering</h3>
                 <p class="issuer">IBM / Coursera</p>
                 <p class="date">2024</p>
-                <a href="#" target="_blank" class="cert-link">Ver credencial →</a>
+                <a href="https://www.credly.com/badges/a6247dba-66f6-4416-8c1b-7975785cf827/public_url" target="_blank" class="cert-link cert-link-text" data-es="Ver credencial →" data-en="View credential →">Ver credencial →</a>
             </div>
 
             <!-- Certification 2 -->
@@ -714,16 +730,25 @@
                 <h3>OpenCV Bootcamp</h3>
                 <p class="issuer">OpenCV University</p>
                 <p class="date">2024</p>
-                <a href="#" target="_blank" class="cert-link">Ver credencial →</a>
+                <a href="https://courses.opencv.org/certificates/6772acca2d674bce8890ebb8fc0ff067" target="_blank" class="cert-link cert-link-text" data-es="Ver credencial →" data-en="View credential →">Ver credencial →</a>
             </div>
 
             <!-- Certification 3 -->
             <div class="cert-card">
                 <div class="cert-icon">📜</div>
-                <h3>AI Engineering & Robotics Engineering</h3>
+                <h3>EY Artificial Intelligence - AI Engineering</h3>
                 <p class="issuer">Ernst & Young</p>
                 <p class="date">2025</p>
-                <a href="#" target="_blank" class="cert-link">Ver credencial →</a>
+                <a href="https://www.credly.com/badges/31d865f6-3fab-49cc-9d67-4ce167ab9905/public_url" target="_blank" class="cert-link cert-link-text" data-es="Ver credencial →" data-en="View credential →">Ver credencial →</a>
+            </div>
+
+            <!-- Certification 4 -->
+            <div class="cert-card">
+                <div class="cert-icon">📜</div>
+                <h3>EY - Robotics Engineering</h3>
+                <p class="issuer">Ernst & Young</p>
+                <p class="date">2025</p>
+                <a href="https://www.credly.com/badges/10b3c07d-901c-4b80-b110-25da3b196b5a/public_url" target="_blank" class="cert-link cert-link-text" data-es="Ver credencial →" data-en="View credential →">Ver credencial →</a>
             </div>
         </div>
     </section>
@@ -731,10 +756,10 @@
     <!-- About Section -->
     <section id="sobre-mi">
         <div class="container">
-            <h2 class="section-title">Sobre Mí</h2>
+            <h2 class="section-title section-title-about" data-es="Sobre Mí" data-en="About Me">Sobre Mí</h2>
             <div class="about-content">
-                <p>Soy Ingeniero Electrónico graduado de la Escuela Colombiana de Ingeniería Julio Garavito (4.25/5.0 GPA) en transición hacia Machine Learning e Inteligencia Artificial. Mi experiencia previa en IT Auditing en Ernst & Young me brindó una base sólida en análisis de datos y calidad, que ahora aplico en el desarrollo de soluciones de ML/AI.</p>
-                <p>Me especializo en Computer Vision, NLP y MLOps, con un enfoque particular en aplicaciones de healthcare que combina mi pasión por la ingeniería y medicina. Actualmente busco oportunidades como ML Engineer, Computer Vision Engineer o Data Scientist, con preferencia por posiciones remotas internacionales.</p>
+                <p class="about-p1" data-es="Soy Ingeniero Electrónico graduado de la Escuela Colombiana de Ingeniería Julio Garavito (4.25/5.0 GPA) en transición hacia Machine Learning e Inteligencia Artificial. Mi experiencia previa en IT Auditing en Ernst & Young me brindó una base sólida en análisis de datos y calidad, que ahora aplico en el desarrollo de soluciones de ML/AI." data-en="I'm an Electronic Engineer who graduated from Escuela Colombiana de Ingeniería Julio Garavito (4.25/5.0 GPA) transitioning to Machine Learning and Artificial Intelligence. My previous experience in IT Auditing at Ernst & Young provided me with a solid foundation in data analysis and quality, which I now apply to developing ML/AI solutions.">Soy Ingeniero Electrónico graduado de la Escuela Colombiana de Ingeniería Julio Garavito (4.25/5.0 GPA) en transición hacia Machine Learning e Inteligencia Artificial. Mi experiencia previa en IT Auditing en Ernst & Young me brindó una base sólida en análisis de datos y calidad, que ahora aplico en el desarrollo de soluciones de ML/AI.</p>
+                <p class="about-p2" data-es="Me especializo en Computer Vision, NLP y MLOps, con un enfoque particular en aplicaciones de healthcare que combina mi pasión por la ingeniería y medicina. Actualmente busco oportunidades como ML Engineer, Computer Vision Engineer o Data Scientist." data-en="I specialize in Computer Vision, NLP, and MLOps, with a particular focus on healthcare applications that combines my passion for engineering and medicine. Currently seeking opportunities as ML Engineer, Computer Vision Engineer, or Data Scientist.">Me especializo en Computer Vision, NLP y MLOps, con un enfoque particular en aplicaciones de healthcare que combina mi pasión por la ingeniería y medicina. Actualmente busco oportunidades como ML Engineer, Computer Vision Engineer o Data Scientist.</p>
                 
                 <div class="skills">
                     <div class="skill">Python</div>
@@ -756,9 +781,9 @@
 
     <!-- Contact Section -->
     <section class="container" id="contacto">
-        <h2 class="section-title">Contacto</h2>
+        <h2 class="section-title section-title-contact" data-es="Contacto" data-en="Contact">Contacto</h2>
         <div class="contact-content">
-            <p>¿Te interesa trabajar conmigo o tienes alguna pregunta? ¡Hablemos!</p>
+            <p class="contact-text" data-es="¿Te interesa trabajar conmigo o tienes alguna pregunta? ¡Hablemos!" data-en="Interested in working together or have any questions? Let's talk!">¿Te interesa trabajar conmigo o tienes alguna pregunta? ¡Hablemos!</p>
             <div class="contact-links">
                 <a href="mailto:estebanmmahecha@outlook.com" class="contact-link">
                     <span class="contact-icon">📧</span>
@@ -778,13 +803,43 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Esteban Morales Mahecha. Todos los derechos reservados.</p>
+        <p class="footer-text" data-es="© 2025 Esteban Morales Mahecha. Todos los derechos reservados." data-en="© 2025 Esteban Morales Mahecha. All rights reserved.">&copy; 2025 Esteban Morales Mahecha. Todos los derechos reservados.</p>
         <div class="footer-links">
-            <a href="#inicio">Inicio</a>
-            <a href="#proyectos">Proyectos</a>
-            <a href="#certificaciones">Certificaciones</a>
-            <a href="#contacto">Contacto</a>
+            <a href="#inicio" class="footer-link-1" data-es="Inicio" data-en="Home">Inicio</a>
+            <a href="#proyectos" class="footer-link-2" data-es="Proyectos" data-en="Projects">Proyectos</a>
+            <a href="#certificaciones" class="footer-link-3" data-es="Certificaciones" data-en="Certifications">Certificaciones</a>
+            <a href="#contacto" class="footer-link-4" data-es="Contacto" data-en="Contact">Contacto</a>
         </div>
     </footer>
+
+    <script>
+        // Language toggle functionality
+        let currentLang = localStorage.getItem('language') || 'es';
+        
+        function toggleLanguage() {
+            currentLang = currentLang === 'es' ? 'en' : 'es';
+            localStorage.setItem('language', currentLang);
+            updateLanguage();
+        }
+        
+        function updateLanguage() {
+            const langToggle = document.querySelector('.lang-toggle');
+            langToggle.textContent = currentLang === 'es' ? 'EN' : 'ES';
+            
+            // Update all elements with language attributes
+            document.querySelectorAll('[data-es]').forEach(element => {
+                const text = element.getAttribute(`data-${currentLang}`);
+                element.textContent = text;
+            });
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = currentLang;
+        }
+        
+        // Set initial language on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            updateLanguage();
+        });
+    </script>
 </body>
 </html>
